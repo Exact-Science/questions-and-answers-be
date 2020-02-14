@@ -17,10 +17,10 @@ for (let i=12392947; i < 12392952; i++){
 }
 console.log(arr);
 
-fs.writeFile(questionsFilePath, arr, (err) => {
-  if (err) throw err;
-  console.log("The file was succesfully saved!");
-});
+// fs.writeFile(questionsFilePath, arr, (err) => {
+//   if (err) throw err;
+//   console.log("The file was succesfully saved!");
+// });
 
 // arr.forEach((line) => {
 //   const newLine = line`${.id},${line.firstName},${line.lastName}\n`;
