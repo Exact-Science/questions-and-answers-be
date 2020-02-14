@@ -1,4 +1,3 @@
-psql -U b-ghostvirus -d qna;
 \c qna;
 
 DROP DATABASE IF EXISTS qna;
@@ -16,8 +15,10 @@ create table answers (id SERIAL PRIMARY KEY, question_id INTEGER, body VARCHAR (
 
 create table photos (id SERIAL PRIMARY KEY, answer_id INTEGER NOT NULL, url VARCHAR (1000) NOT NULL, FOREIGN KEY (answer_id) REFERENCES answers (id));
 
-\COPY questions FROM '/Users/b-ghostvirus/Galvanize/Capstone-Project/SDC/database/data/questions.csv' DELIMITERS ',' CSV HEADER;
+\COPY questions FROM '/Users/b-ghostvirus/Galvanize/Capstone-Project/SDC/database/data/additional_questions.csv' DELIMITERS ',' CSV HEADER;
 
-\COPY answers FROM '/Users/b-ghostvirus/Galvanize/Capstone-Project/SDC/database/data/answers.csv' DELIMITERS ',' CSV HEADER;
+-- \COPY answers FROM '/Users/b-ghostvirus/Galvanize/Capstone-Project/SDC/database/data/answers.csv' DELIMITERS ',' CSV HEADER;
 
-\COPY photos FROM '/Users/b-ghostvirus/Galvanize/Capstone-Project/SDC/database/data/answers_photos.csv' DELIMITERS ',' CSV HEADER;
+-- \COPY photos FROM '/Users/b-ghostvirus/Galvanize/Capstone-Project/SDC/database/data/answers_photos.csv' DELIMITERS ',' CSV HEADER;
+
+quit;
