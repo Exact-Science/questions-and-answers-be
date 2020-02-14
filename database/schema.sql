@@ -21,4 +21,4 @@ create table photos (id SERIAL PRIMARY KEY, answer_id INTEGER NOT NULL, url VARC
 
 -- \COPY photos FROM '/Users/b-ghostvirus/Galvanize/Capstone-Project/SDC/database/data/answers_photos.csv' DELIMITERS ',' CSV HEADER;
 
-quit;
+\q
