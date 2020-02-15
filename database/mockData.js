@@ -3,14 +3,13 @@ const fs = require('file-system');
 const Moment = require('moment');
 const { Pool, Client } = require('pg');
 const { performance } = require('perf_hooks');
-let questionsFilePath = '/Users/b-ghostvirus/Galvanize/Capstone-Project/SDC/database/data/additional_questions.csv';
+let questionsFilePath = 'database/data/additional_questions.csv';
 
 const time1 = performance.now();
-
 const fileHeaderFields = `id, product_id, body, date, name, email, reported, helpfulness\n`;
 fs.appendFileSync(questionsFilePath, fileHeaderFields, 'utf8');
 
-for (let i=3521635; i < 10000000; i++) {
+for (let i=3521635; i < 10000001; i++) {
   let newLine = '';
   const id = i;
   const product_id = faker.random.number({min:1, max:1000000});
