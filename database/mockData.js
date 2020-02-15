@@ -1,7 +1,7 @@
 const faker = require('faker');
 const fs = require('file-system');
 const Moment = require('moment');
-const { Pool, Client } = require('pg');
+// const { Pool } = require('pg');
 const { performance } = require('perf_hooks');
 let questionsFilePath = 'database/data/additional_questions.csv';
 
