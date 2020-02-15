@@ -1,7 +1,14 @@
-const { Pool, Client } = require('pg');
-const connectionString = 'postgressql://postgres:'
-const client = new Client({
-  connectionString: connectionString
-});
+const { Pool } = require('pg');
 
-await client.connect();
+const pool = new Pool({
+  host: 'localhost',
+  user: 'sdc',
+  max: 20,
+  idleTimeoutMillis: 30000,
+  connectionTimeoutMillis: 2000,
+})
+
+pool.query('SELECT NOW()', (err, res) => {
+  console.log(err, res)
+  pool.end()
+})
