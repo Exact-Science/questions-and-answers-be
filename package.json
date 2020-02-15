@@ -2,10 +2,11 @@
   "name": "SDC",
   "version": "1.0.0",
   "description": "Questions and Answers Module Back End",
-  "main": "index.js",
+  "main": "server/",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build-db": "psql -U b-ghostvirus -d qna -f database/schema.sql"
+    "build-db": "psql -U b-ghostvirus -d qna -f database/schema.sql",
+    "start": "index.js"
   },
   "repository": {
     "type": "git",
