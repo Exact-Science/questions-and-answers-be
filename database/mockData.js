@@ -1,13 +1,17 @@
-var faker = require('faker');
-var fs = require('file-system');
-var Moment = require('moment');
+const faker = require('faker');
+const fs = require('file-system');
+const Moment = require('moment');
 const { Pool, Client } = require('pg');
-
-let arr = '';
+const { performance } = require('perf_hooks');
 let questionsFilePath = '/Users/b-ghostvirus/Galvanize/Capstone-Project/SDC/database/data/additional_questions.csv';
 
-arr = `id, product_id, body, date, name, email, reported, helpfulness\n`;
-for (let i=3521635; i < 5000000; i++){
+const time1 = performance.now();
+
+const fileHeaderFields = `id, product_id, body, date, name, email, reported, helpfulness\n`;
+fs.appendFileSync(questionsFilePath, fileHeaderFields, 'utf8');
+
+for (let i=3521635; i < 10000000; i++) {
+  let newLine = '';
   const id = i;
   const product_id = faker.random.number({min:1, max:1000000});
   let body = faker.lorem.sentence();
@@ -21,8 +25,13 @@ for (let i=3521635; i < 5000000; i++){
   const regex = /,/gi;
   body = body.replace(regex,'\,');
   name = name.replace(regex,'');
-  arr += `${id},${product_id},${body},${date},${name},${email},${reported},${helpfulness}\n`;
+  newLine += `${id},${product_id},${body},${date},${name},${email},${reported},${helpfulness}\n`;
+  fs.appendFileSync(questionsFilePath, newLine, 'utf8');
 }
 
-let writer = fs.createWriteStream(questionsFilePath);
-writer.write(arr);
+const time2 = performance.now();
+const totalTime = time2 - time1;
+const mins = Math.floor(totalTime / 60000) % 60;
+const secs = ((totalTime / 1000) % 60);
+const msecs = ("00" + totalTime).slice(-3);
+console.log(`${totalTime} (${mins}:${secs}.${msecs})`);
