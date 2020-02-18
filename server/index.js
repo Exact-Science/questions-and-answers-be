@@ -10,14 +10,6 @@ const app = express();
 // app.use(cors());
 app.use(bodyParser.json());
 
-// app.get('/qa', function (req, res) {
-//   // console.log(req.params.question_id)
-//   console.log(req.body);
-//   res.send("hello world");
-//   // res.render('special')
-// })
-
-
 app.use('/', routes);
 
 app.listen(port, () => {console.log(`The server is up and running on port: ${port}`)});
