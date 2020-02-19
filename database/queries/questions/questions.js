@@ -13,22 +13,40 @@ const getProductQuestions = (product_id) => {
 
   return db.pool.query(query)
     .then((dbResults) => {
+
       // iterate over dbResults
-        // if question doesn't exist in results
+      dbResults.rows.forEach((q) => {
+
+        let qExists = false;
+        // check if question already exists in formatted results
+        for (let i = 0; i < questions.results.length; i++) {
+          currentQuestion = questions.results[i];
+          if (currentQuestion.question_id === q.question_id) {
+            qExists = true;
+            // check answers
+            // check photos
+          }
+        }
+        // if question doesn't exist in formatted results
+        if (!qExists) {
+          questions.results.push({
+            question_id: q.question_id,
+            question_body: q.question_body,
+            question_date: q.question_date,
+            asker_name: q.question_name,
+            question_helpfulness: q.question_helpfulness,
+            reported: q.question_reported,
+            answers: {},
+          })
           // store it, create an array for answers
           // check if there is an answer (check if value is not null), if there is
             // store the the answer properties as an object in an array, create photo array property
               // check if there is a poto (check if the photo value is null), if there is
                 // store the photo as a string in photos array
-
-      // questions.results = dbResults.map((q) = {
-      //   questions.results.forEach((qr) => {
-      //     if (!q.question_id[q]) {
-
-      //     }
-      //   })
-      // })
+        }
+      })
     })
+    .then(() => questions);
 }
 
 module.exports = {
