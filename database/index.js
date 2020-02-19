@@ -1,5 +1,5 @@
 const { Pool } = require('pg');
-console.log(process.env.DB_HOST);
+// console.log(process.env.DB_HOST);
 
 const pool = new Pool({
   host: process.env.DB_HOST,
@@ -11,12 +11,6 @@ const pool = new Pool({
   port: 5432,
 })
 
-// const query = 'SELECT count(*) from questions';
-// pool.query(query, (err, res) => {
-//     console.log(err, res)
-//     pool.end()
-//   })
-// console.log(pool)
 console.log(`The database is up and running on port: ${pool.options.port}`);
 
 module.exports = {

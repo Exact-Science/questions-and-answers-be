@@ -5,8 +5,8 @@ const qQueries = require('../database/queries/questions/questions.js')
 /* ------- Get ------- */
 // questions
 router.get('/qa/:product_id', function (req, res) {
-  console.log(qQueries.getProductQuestions(req.params.product_id));
-  res.send(req.params.product_id);
+  qQueries.getProductQuestions(req.params.product_id)
+  .then((results) => res.send(results))
 })
 
 // answers
