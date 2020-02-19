@@ -8,11 +8,11 @@ DROP TABLE IF EXISTS questions;
 
 create database qna;
 
-create table questions (id SERIAL PRIMARY KEY, product_id VARCHAR, body VARCHAR (1000) NOT NULL, date TIMESTAMPTZ NOT NULL, name VARCHAR (60) NOT NULL, email VARCHAR (60) NOT NULL, reported SMALLINT, helpfulness SMALLINT);
+create table questions (questionId SERIAL PRIMARY KEY, productId VARCHAR, questionBody VARCHAR (1000) NOT NULL, date TIMESTAMPTZ NOT NULL, name VARCHAR (60) NOT NULL, questionEmail VARCHAR (60) NOT NULL, questionReported SMALLINT, questionHelpfulness SMALLINT);
 
-create table answers (id SERIAL PRIMARY KEY, question_id INTEGER, body VARCHAR (1000) NOT NULL, date TIMESTAMPTZ NOT NULL, name VARCHAR (60) NOT NULL, email VARCHAR (60) NOT NULL, reported SMALLINT, helpfulness SMALLINT, FOREIGN KEY (question_id) REFERENCES questions (id));
+create table answers (answerId SERIAL PRIMARY KEY, answer_questionId INTEGER, answerBody VARCHAR (1000) NOT NULL, date TIMESTAMPTZ NOT NULL, name VARCHAR (60) NOT NULL, answerEmail VARCHAR (60) NOT NULL, answerReported SMALLINT, answerHelpfulness SMALLINT, FOREIGN KEY (answer_questionId) REFERENCES questions (questionId));
 
-create table photos (id SERIAL PRIMARY KEY, answer_id INTEGER NOT NULL, url VARCHAR (1000) NOT NULL, FOREIGN KEY (answer_id) REFERENCES answers (id));
+create table photos (photoId SERIAL PRIMARY KEY, photo_answerId INTEGER NOT NULL, url VARCHAR (1000) NOT NULL, FOREIGN KEY (photo_answerId) REFERENCES answers (answerId));
 
 \timing
 
