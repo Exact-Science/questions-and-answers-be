@@ -1,7 +1,7 @@
 const db = require('../../index.js');
 
 const getProductQuestions = (product_id) => {
-  const query = `select questions.question_id, questions.question_body, questions.question_date, questions.question_name, questions.question_email, questions.question_reported, questions.question_helpfulness, answers.answer_id, answers.answer_body, answers.answer_date, answers.answer_name, answers.answer_email, answers.answer_reported, answers.answer_helpfulness, photos.photo_id, photos.photo_url from questions left join answers on questions.question_id = answers.answer_question_id left join photos on answers.answer_id = photos.photo_answer_id where questions.product_id = '${product_id}' order by questions.question_helpfulness desc`;
+  const query = `select questions.question_id, questions.question_body, questions.question_date, questions.question_name, questions.question_email, questions.question_reported, questions.question_helpfulness, answers.answer_id, answers.answer_body, answers.answer_date, answers.answer_name, answers.answer_email, answers.answer_reported, answers.answer_helpfulness, photos.photo_id, photos.photo_url from questions left join answers on questions.question_id = answers.answer_question_id left join photos on answers.answer_id = photos.photo_answer_id where questions.product_id = '${product_id}' order by questions.question_helpfulness desc, answers.answer_helpfulness desc`;
 
   let questions = {
     product_id,
@@ -27,8 +27,9 @@ const getProductQuestions = (product_id) => {
             // check photos
           }
         }
-        // if question doesn't exist in formatted results
+        // if question doesn't exist in formatted results, store initial object (include answers and photos)
         if (!qExists) {
+          // store question, create an object for answers
           questions.results.push({
             question_id: q.question_id,
             question_body: q.question_body,
@@ -38,11 +39,20 @@ const getProductQuestions = (product_id) => {
             reported: q.question_reported,
             answers: {},
           })
-          // store it, create an array for answers
           // check if there is an answer (check if value is not null), if there is
-            // store the the answer properties as an object in an array, create photo array property
-              // check if there is a poto (check if the photo value is null), if there is
-                // store the photo as a string in photos array
+          if (q.answer_id) {
+            questions.results[questions.results.length - 1].answers[q.answer_id] = {
+              id: q.answer_id,
+              body: q.answer_body,
+              date: q.answer_date,
+              answerer_name: q.answer_name,
+              helpfulness: q.answer_helpfulness,
+              photos: [],
+            }
+        }
+          // store the the answer properties as an object in an array, create photo array property
+            // check if there is a poto (check if the photo value is null), if there is
+              // store the photo as a string in photos array
         }
       })
     })
