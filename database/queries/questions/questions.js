@@ -49,10 +49,17 @@ const getProductQuestions = (product_id) => {
               helpfulness: q.answer_helpfulness,
               photos: [],
             }
-        }
-          // store the the answer properties as an object in an array, create photo array property
-            // check if there is a poto (check if the photo value is null), if there is
-              // store the photo as a string in photos array
+          }
+
+          if (q.photo_id) {
+            questions.results[questions.results.length - 1].answers[q.answer_id].photos.push({
+              id: q.photo_id,
+              url: q.photo_url,
+            })
+          }
+  //         // store the the answer properties as an object in an array, create photo array property
+  //           // check if there is a poto (check if the photo value is null), if there is
+  //             // store the photo as a string in photos array
         }
       })
     })
