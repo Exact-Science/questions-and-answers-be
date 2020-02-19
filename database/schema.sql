@@ -8,11 +8,11 @@ DROP TABLE IF EXISTS questions;
 
 create database qna;
 
-create table questions (questionId SERIAL PRIMARY KEY, productId VARCHAR, questionBody VARCHAR (1000) NOT NULL, date TIMESTAMPTZ NOT NULL, name VARCHAR (60) NOT NULL, questionEmail VARCHAR (60) NOT NULL, questionReported SMALLINT, questionHelpfulness SMALLINT);
+create table questions (question_id SERIAL PRIMARY KEY, product_id VARCHAR, question_body VARCHAR (1000) NOT NULL, question_date TIMESTAMPTZ NOT NULL, question_name VARCHAR (60) NOT NULL, question_email VARCHAR (60) NOT NULL, question_reported SMALLINT, question_helpfulness SMALLINT);
 
-create table answers (answerId SERIAL PRIMARY KEY, answer_questionId INTEGER, answerBody VARCHAR (1000) NOT NULL, date TIMESTAMPTZ NOT NULL, name VARCHAR (60) NOT NULL, answerEmail VARCHAR (60) NOT NULL, answerReported SMALLINT, answerHelpfulness SMALLINT, FOREIGN KEY (answer_questionId) REFERENCES questions (questionId));
+create table answers (answerId SERIAL PRIMARY KEY, answer_question_id INTEGER, answer_body VARCHAR (1000) NOT NULL, answer_date TIMESTAMPTZ NOT NULL, answer_name VARCHAR (60) NOT NULL, answer_email VARCHAR (60) NOT NULL, answer_reported SMALLINT, answer_helpfulness SMALLINT, FOREIGN KEY (answer_question_id) REFERENCES questions (question_id));
 
-create table photos (photoId SERIAL PRIMARY KEY, photo_answerId INTEGER NOT NULL, url VARCHAR (1000) NOT NULL, FOREIGN KEY (photo_answerId) REFERENCES answers (answerId));
+create table photos (photo_id SERIAL PRIMARY KEY, photo_answer_id INTEGER NOT NULL, photo_url VARCHAR (1000) NOT NULL, FOREIGN KEY (photo_answer_id) REFERENCES answers (answer_id));
 
 \timing
 

@@ -6,7 +6,8 @@ const { performance } = require('perf_hooks');
 let questionsFilePath = 'database/data/additional_questions.csv';
 
 const time1 = performance.now();
-const fileHeaderFields = `id, product_id, body, date, name, email, reported, helpfulness\n`;
+
+const fileHeaderFields = `question_id, product_id, question_body, question_date, question_name, question_email, question_reported, question_helpfulness\n`;
 fs.appendFileSync(questionsFilePath, fileHeaderFields, 'utf8');
 
 for (let i=3521635; i < 10000001; i++) {
