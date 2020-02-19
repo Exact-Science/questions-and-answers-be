@@ -18,16 +18,28 @@ const getProductQuestions = (product_id) => {
       dbResults.rows.forEach((q) => {
 
         let qExists = false;
+
         // check if question already exists in formatted results
         for (let i = 0; i < questions.results.length; i++) {
           currentQuestion = questions.results[i];
           if (currentQuestion.question_id === q.question_id) {
             qExists = true;
             // check answers
+            // check if there is an answer (not null), if there is
+            if (q.answer_id) {
+              questions.results[i].answers[q.answer_id] = {
+                id: q.answer_id,
+                body: q.answer_body,
+                date: q.answer_date,
+                answerer_name: q.answer_name,
+                helpfulness: q.answer_helpfulness,
+              }
+            }
+
             // check photos
           }
         }
-        // if question doesn't exist in formatted results, store initial object (include answers and photos)
+        // if question doesn't exist in formatted results
         if (!qExists) {
           // store question, create an object for answers
           questions.results.push({
@@ -39,7 +51,7 @@ const getProductQuestions = (product_id) => {
             reported: q.question_reported,
             answers: {},
           })
-          // check if there is an answer (check if value is not null), if there is
+          // check if there is an answer (not null), if there is
           if (q.answer_id) {
             questions.results[questions.results.length - 1].answers[q.answer_id] = {
               id: q.answer_id,
@@ -50,16 +62,14 @@ const getProductQuestions = (product_id) => {
               photos: [],
             }
           }
-
+          // check if there is a photo (not null), if there is
           if (q.photo_id) {
+            // store initial photo
             questions.results[questions.results.length - 1].answers[q.answer_id].photos.push({
               id: q.photo_id,
               url: q.photo_url,
             })
           }
-  //         // store the the answer properties as an object in an array, create photo array property
-  //           // check if there is a poto (check if the photo value is null), if there is
-  //             // store the photo as a string in photos array
         }
       })
     })
