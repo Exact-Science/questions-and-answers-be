@@ -11,7 +11,7 @@ const pool = new Pool({
   connectionTimeoutMillis: 2000,
   port: 5432,
 })
-console.log(pool);
+
 console.log(`The database is up and running on port: ${pool.options.port}`);
 
 module.exports = {

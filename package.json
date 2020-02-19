@@ -4,7 +4,7 @@
   "description": "Questions and Answers Module Back End",
   "main": "server/",
   "scripts": {
-    "build-db": "psql -U b-ghostvirus -d qna -f database/schema.sql",
+    "build-db": "psql -U postgres -f database/schema.sql",
     "start": "index.js"
   },
   "repository": {
