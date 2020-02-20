@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const qQueries = require('../database/queries/questions/questions.js')
+const qQueries = require('../database/queries/questions/questions.js');
+const aQueries = require('../database/queries/answers/answers.js');
 
 /* ------- Get ------- */
 // questions
@@ -11,7 +12,8 @@ router.get('/qa/:product_id', function (req, res) {
 
 // answers
 router.get('/qa/:question_id/answers', function (req, res) {
-  res.send(req.params.question_id);
+  aQueries.getAnswers(req.params.question_id, req.query.page, req.query.count)
+  .then((results) => res.send(results))
 })
 
 /* ------- Post ------- */

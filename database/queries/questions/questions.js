@@ -4,9 +4,6 @@ const getProductQuestions = (product_id, o, l) => {
 
   let offset = o || 1;
   let limit = l || 5;
-
-  console.log(offset, limit)
-
   const query =
   `select
     questions.question_id,

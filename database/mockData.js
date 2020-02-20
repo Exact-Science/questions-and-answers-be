@@ -27,7 +27,7 @@ for (let i=3521635; i < 10000001; i++) {
   name = name.replace(regex,'');
   newLine += `${id},${product_id},${body},${date},${name},${email},${reported},${helpfulness}\n`;
   fs.appendFileSync(questionsFilePath, newLine, 'utf8');
-}
+}ff
 
 const time2 = performance.now();
 const totalTime = time2 - time1;
