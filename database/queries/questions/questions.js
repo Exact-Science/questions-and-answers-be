@@ -21,24 +21,12 @@ const getProductQuestions = (product_id) => {
 
         // check if question already exists in formatted results
         for (let i = 0; i < questions.results.length; i++) {
-          currentQuestion = questions.results[i];
-          if (currentQuestion.question_id === q.question_id) {
+          if (questions.results[i].question_id === q.question_id) {
             qExists = true;
-            // check answers
-            // check if there is an answer (not null), if there is
-            if (q.answer_id) {
-              questions.results[i].answers[q.answer_id] = {
-                id: q.answer_id,
-                body: q.answer_body,
-                date: q.answer_date,
-                answerer_name: q.answer_name,
-                helpfulness: q.answer_helpfulness,
-              }
-            }
-
-            // check photos
+            break;
           }
         }
+
         // if question doesn't exist in formatted results
         if (!qExists) {
           // store question, create an object for answers
@@ -51,27 +39,57 @@ const getProductQuestions = (product_id) => {
             reported: q.question_reported,
             answers: {},
           })
-          // check if there is an answer (not null), if there is
-          if (q.answer_id) {
-            questions.results[questions.results.length - 1].answers[q.answer_id] = {
-              id: q.answer_id,
-              body: q.answer_body,
-              date: q.answer_date,
-              answerer_name: q.answer_name,
-              helpfulness: q.answer_helpfulness,
-              photos: [],
-            }
+        }
+      })
+
+      dbResults.rows.forEach((q) => {
+        let aExists = false;  // boolean to track if answer has already been accounted for
+
+        // check if answer already exists in formatted results
+        for (let i = 0; i < questions.results.length; i++) {
+          if (q.answer_id && Object.keys(questions.results[i].answers).includes(q.answer_id.toString())) {
+            aExists = true;
+            break;
           }
-          // check if there is a photo (not null), if there is
-          if (q.photo_id) {
-            // store initial photo
-            questions.results[questions.results.length - 1].answers[q.answer_id].photos.push({
-              id: q.photo_id,
-              url: q.photo_url,
-            })
+        }
+
+        // check if the answer is not a duplicate and the answer is not null
+        if (!aExists && q.answer_id) {
+          // iterate over output object and store answers on appropriate question
+          for (let i = 0; i < questions.results.length; i++) {
+            if (questions.results[i].question_id === q.question_id) {
+              questions.results[i].answers[q.answer_id] = {
+                id: q.answer_id,
+                body: q.answer_body,
+                date: q.answer_date,
+                answerer_name: q.answer_name,
+                helpfulness: q.answer_helpfulness,
+                photos: [],
+              }
+              break;
+            }
           }
         }
       })
+
+      // iterate over the db results
+      dbResults.rows.forEach((q) => {
+        // check if a photo exists (id is not null)
+        if (q.photo_id) {
+          // iterate over output object and store photo on appropriate question
+          for (let i = 0; i < questions.results.length; i++) {
+            if (questions.results[i].question_id === q.question_id) {
+              questions.results[i].answers[q.answer_id].photos.push({
+                id: q.photo_id,
+                url: q.photo_url,
+              })
+              break;
+            }
+          }
+        }
+      })
+
+
     })
     .then(() => questions);
 }
