@@ -19,7 +19,8 @@ router.get('/qa/:question_id/answers', function (req, res) {
 /* ------- Post ------- */
 // question
 router.post('/qa/:product_id', function (req, res) {
-  res.send(req.params.product_id);
+  qQueries.addQuestion(req.params.product_id, req.query, req.body)
+  .then((results) => res.send(results));
 })
 
 // answer

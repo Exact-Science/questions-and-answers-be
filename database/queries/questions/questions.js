@@ -115,6 +115,32 @@ const getProductQuestions = (product_id, o, l) => {
     .then(() => questions);
 }
 
+const addQuestion = (product_id, urlParams, jsonParams) => {
+  const body = jsonParams.body || urlParams.body;
+  const name = jsonParams.name || urlParams.name;
+  const email = jsonParams.email || urlParams.email;
+
+  try {
+    if (name.length > 0 && body.length > 0 && email.length > 0) {
+      const query =
+        `INSERT INTO QUESTIONS
+          (PRODUCT_ID, QUESTION_BODY, QUESTION_DATE, QUESTION_NAME, QUESTION_EMAIL, QUESTION_REPORTED, QUESTION_HELPFULNESS)
+        VALUES
+          ('${product_id}', '${body}', current_timestamp, '${name}', '${email}', '0', '0')`;
+
+          return db.pool.query(query)
+            .then(() => 201)
+
+      // INSERT INTO QUESTIONS (PRODUCT_ID, QUESTION_BODY, QUESTION_DATE, QUESTION_NAME, QUESTION_EMAIL, QUESTION_REPORTED, QUESTION_HELPFULNESS) VALUES ('5', 'test', current_timestamp, 'test', 'abc@abc.com', '0', '0');
+      // INSERT INTO QUESTIONS (QUESTION_BODY, QUESTION_NAME, QUESTION_EMAIL) VALUES ('test', 'test', 'test');
+    }
+  }
+  catch(e) {
+    return  400;
+  }
+}
+
 module.exports = {
   getProductQuestions,
+  addQuestion,
 }
