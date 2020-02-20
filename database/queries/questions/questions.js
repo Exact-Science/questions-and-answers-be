@@ -128,8 +128,8 @@ const addQuestion = (product_id, urlParams, jsonParams) => {
         VALUES
           ('${product_id}', '${body}', current_timestamp, '${name}', '${email}', '0', '0')`;
 
-          return db.pool.query(query)
-            .then(() => 201)
+      return db.pool.query(query)
+        .then(() => 201)
     }
   }
   catch(e) {

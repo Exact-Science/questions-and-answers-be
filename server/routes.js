@@ -7,13 +7,13 @@ const aQueries = require('../database/queries/answers/answers.js');
 // questions
 router.get('/qa/:product_id', function (req, res) {
   qQueries.getProductQuestions(req.params.product_id, req.query.page, req.query.count)
-  .then((results) => res.send(results))
+  .then((results) => res.status(200).send(results))
 })
 
 // answers
 router.get('/qa/:question_id/answers', function (req, res) {
   aQueries.getAnswers(req.params.question_id, req.query.page, req.query.count)
-  .then((results) => res.send(results))
+  .then((results) => res.status(200).send(results))
 })
 
 /* ------- Post ------- */

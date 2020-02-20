@@ -74,6 +74,24 @@ return db.pool.query(query)
     .then(() => answers);
 }
 
+const addAnswer = (question_id, urlParams, jsonParams) => {
+  // const body = jsonParams.body || urlParams.body;
+  // const name = jsonParams.name || urlParams.name;
+  // const email = jsonParams.email || urlParams.email;
+
+  try {
+    if (name.length > 0 && body.length > 0 && email.length > 0) {
+      const query = '';
+
+      return db.pool.query(query)
+        .then(() => 201)
+    }
+  }
+  catch(e) {
+    return  400;
+  }
+}
+
 module.exports = {
   getAnswers,
 }
