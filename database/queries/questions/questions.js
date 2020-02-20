@@ -2,8 +2,8 @@ const db = require('../../index.js');
 
 const getProductQuestions = (product_id, o, l) => {
 
-  let offset = o || 1;
-  let limit = l || 5;
+  const offset = o || 1;
+  const limit = l || 5;
   const query =
   `select
     questions.question_id,
