@@ -130,9 +130,6 @@ const addQuestion = (product_id, urlParams, jsonParams) => {
 
           return db.pool.query(query)
             .then(() => 201)
-
-      // INSERT INTO QUESTIONS (PRODUCT_ID, QUESTION_BODY, QUESTION_DATE, QUESTION_NAME, QUESTION_EMAIL, QUESTION_REPORTED, QUESTION_HELPFULNESS) VALUES ('5', 'test', current_timestamp, 'test', 'abc@abc.com', '0', '0');
-      // INSERT INTO QUESTIONS (QUESTION_BODY, QUESTION_NAME, QUESTION_EMAIL) VALUES ('test', 'test', 'test');
     }
   }
   catch(e) {
