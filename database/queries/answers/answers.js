@@ -75,16 +75,19 @@ return db.pool.query(query)
 }
 
 const addAnswer = (question_id, urlParams, jsonParams) => {
-  // const body = jsonParams.body || urlParams.body;
-  // const name = jsonParams.name || urlParams.name;
-  // const email = jsonParams.email || urlParams.email;
+  const body = jsonParams.body || urlParams.body;
+  const name = jsonParams.name || urlParams.name;
+  const email = jsonParams.email || urlParams.email;
+  const photos = jsonParams.photos || urlParams.photos;
 
   try {
     if (name.length > 0 && body.length > 0 && email.length > 0) {
-      const query = '';
+      console.log("testing")
+      gi
 
-      return db.pool.query(query)
-        .then(() => 201)
+      // return db.pool.query(pQuery)
+      // .then(() => 201)
+
     }
   }
   catch(e) {

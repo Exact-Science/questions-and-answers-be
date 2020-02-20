@@ -25,8 +25,8 @@ router.post('/qa/:product_id', function (req, res) {
 
 // answer
 router.post('/qa/:question_id/answers', function (req, res) {
-  qQueries.addAnswer(req.params.question_id, req.query, req.body)
-  .then((results) => res.status(results).send(results));
+  aQueries.addAnswer(req.params.question_id, req.query, req.body)
+  // .then((results) => res.status(results).send(results));
 })
 
 
