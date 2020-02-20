@@ -20,12 +20,13 @@ router.get('/qa/:question_id/answers', function (req, res) {
 // question
 router.post('/qa/:product_id', function (req, res) {
   qQueries.addQuestion(req.params.product_id, req.query, req.body)
-  .then((results) => res.send(results));
+  .then((results) => res.status(results).send(results));
 })
 
 // answer
 router.post('/qa/:question_id/answers', function (req, res) {
-  res.send(req.params.question_id);
+  qQueries.addAnswer(req.params.question_id, req.query, req.body)
+  .then((results) => res.status(results).send(results));
 })
 
 

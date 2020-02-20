@@ -94,4 +94,5 @@ const addAnswer = (question_id, urlParams, jsonParams) => {
 
 module.exports = {
   getAnswers,
+  addAnswer,
 }
