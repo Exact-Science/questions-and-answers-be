@@ -16,7 +16,7 @@ const getAnswers = (question_id, o, l) => {
     photos.photo_url
       from answers
       left join photos on answers.answer_id = photos.photo_answer_id
-      where answers.answer_question_id = '${question_id}'
+      where answers.answer_question_id = '${question_id}' AND answers.answer_reported < '1'
       order by answers.answer_helpfulness desc
       offset ${offset} limit ${limit}`;
 

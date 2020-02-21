@@ -25,7 +25,7 @@ const getProductQuestions = (product_id, o, l) => {
       from questions
       left join answers on questions.question_id = answers.answer_question_id
       left join photos on answers.answer_id = photos.photo_answer_id
-      where questions.product_id = '${product_id}'
+      where questions.product_id = '${product_id}' AND questions.question_reported < '1'
       order by questions.question_helpfulness desc, answers.answer_helpfulness desc
       offset ${offset} limit ${limit}`;
 
@@ -139,7 +139,7 @@ const addQuestion = (product_id, urlParams, jsonParams) => {
 
 const markQuestionHelpful = (question_id) => {
   try {
-    const hQuery = `SELECT QUESTION_HELPFULNESS FROM QUESTIONS WHERE QUESTION_ID = '5'`;
+    const hQuery = `SELECT QUESTION_HELPFULNESS FROM QUESTIONS WHERE QUESTION_ID = '${question_id}'`;
     return db.pool.query(hQuery)
       .then((results) => {
         helpfulnessValue = results.rows[0].question_helpfulness + 1;
@@ -155,8 +155,27 @@ const markQuestionHelpful = (question_id) => {
   }
 }
 
+const reportQuestion = (question_id) => {
+  try {
+    const rQuery = `SELECT QUESTION_REPORTED FROM QUESTIONS WHERE QUESTION_ID = '${question_id}'`;
+    return db.pool.query(rQuery)
+      .then((results) => {
+        reportedValue = results.rows[0].question_reported + 1;
+        const updateReportedQuery = `UPDATE QUESTIONS
+        SET QUESTION_REPORTED = '${reportedValue}'
+        WHERE QUESTION_ID = ${question_id}`;
+        return db.pool.query(updateReportedQuery)
+          .then(() => 204)
+      })
+  }
+  catch(e) {
+    return 400;
+  }
+}
+
 module.exports = {
   getProductQuestions,
   addQuestion,
   markQuestionHelpful,
+  reportQuestion,
 }
