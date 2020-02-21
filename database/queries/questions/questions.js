@@ -43,7 +43,7 @@ const getProductQuestions = (product_id, o, l) => {
         let qExists = false;
 
         // check if question already exists in formatted results
-        for (let i = 0; i < questions.results.length; i++) {
+        for  (let i = 0; i < questions.results.length; i++) {
           if (questions.results[i].question_id === q.question_id) {
             qExists = true;
             break;
