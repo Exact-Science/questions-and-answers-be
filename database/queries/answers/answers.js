@@ -114,7 +114,45 @@ const addAnswer = (question_id, urlParams, jsonParams) => {
   }
 }
 
+const markAnswerHelpful = (answer_id) => {
+  try {
+    const hQuery = `SELECT ANSWER_HELPFULNESS FROM ANSWERS WHERE ANSWER_ID = '${answer_id}'`;
+    return db.pool.query(hQuery)
+      .then((results) => {
+        helpfulnessValue = results.rows[0].answer_helpfulness + 1;
+        const updateHelpfullnessQuery = `UPDATE ANSWERS
+        SET ANSWER_HELPFULNESS = '${helpfulnessValue}'
+        WHERE ANSWER_ID = ${answer_id}`;
+        return db.pool.query(updateHelpfullnessQuery)
+          .then(() => 204)
+      })
+  }
+  catch(e) {
+    return 400;
+  }
+}
+
+const reportAnswer = (answer_id) => {
+  try {
+    const rQuery = `SELECT ANSWER_REPORTED FROM ANSWERS WHERE ANSWER_ID = '${answer_id}'`;
+    return db.pool.query(rQuery)
+      .then((results) => {
+        reportedValue = results.rows[0].answer_reported + 1;
+        const updateReportedQuery = `UPDATE ANSWERS
+        SET ANSWER_REPORTED = '${reportedValue}'
+        WHERE ANSWER_ID = ${answer_id}`;
+        return db.pool.query(updateReportedQuery)
+          .then(() => 204)
+      })
+  }
+  catch(e) {
+    return 400;
+  }
+}
+
 module.exports = {
   getAnswers,
   addAnswer,
+  markAnswerHelpful,
+  reportAnswer,
 }

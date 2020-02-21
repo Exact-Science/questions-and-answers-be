@@ -45,12 +45,14 @@ router.put('/qa/question/:question_id/report', function (req, res) {
 
 //Helpful Answer
 router.put('/qa/answer/:answer_id/helpful', function (req, res) {
-  res.send(req.params.answer_id);
+  aQueries.markAnswerHelpful(req.params.answer_id)
+    .then((results) => res.sendStatus(results));
 })
 
 //Report Answer
-router.put('PUT /qa/answer/:answer_id/report', function (req, res) {
-  res.send(req.params.answer_id);
+router.put('/qa/answer/:answer_id/report', function (req, res) {
+  aQueries.reportAnswer(req.params.answer_id)
+    .then((results) => res.sendStatus(results));
 })
 
 module.exports = router;
