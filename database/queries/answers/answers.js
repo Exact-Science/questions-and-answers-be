@@ -2,7 +2,7 @@ const db = require('../../index.js');
 
 const getAnswers = (question_id, o, l) => {
   const offset = o || 1;
-  const limit = l || 5;
+  const limit = l || 100;
   const query =
   `select
     answers.answer_id,
@@ -82,12 +82,31 @@ const addAnswer = (question_id, urlParams, jsonParams) => {
 
   try {
     if (name.length > 0 && body.length > 0 && email.length > 0) {
-      console.log("testing")
-      gi
+      const aQuery =
+      `INSERT INTO ANSWERS
+          (ANSWER_QUESTION_ID, ANSWER_BODY, ANSWER_DATE, ANSWER_NAME, ANSWER_EMAIL, ANSWER_REPORTED, ANSWER_HELPFULNESS)
+        VALUES
+          ('${question_id}', '${body}', current_timestamp, '${name}', '${email}', '0', '0')`;
 
-      // return db.pool.query(pQuery)
-      // .then(() => 201)
-
+      return db.pool.query(aQuery)
+        .then(() => {
+          if (photos && photos.length > 0) {
+            const newAnswerIdQuery = `SELECT ANSWER_ID FROM ANSWERS ORDER BY ANSWER_ID DESC LIMIT 1`;
+            db.pool.query(newAnswerIdQuery)
+            .then((newAnswerID) => {
+              newAnswerID = newAnswerID.rows[0].answer_id;
+              const photoPromises = photos.map(async (p) => {
+                const pQuery = `INSERT INTO PHOTOS (PHOTO_ANSWER_ID, PHOTO_URL) VALUES ('${newAnswerID}', '${p}')`;
+                return await db.pool.query(pQuery)
+                .catch((error) => console.log(error))
+              })
+              Promise.all(photoPromises)
+              .then(() => 201);
+            })
+          }
+        })
+        .catch((error) => console.log(error))
+        .then(() => 201);
     }
   }
   catch(e) {
