@@ -133,11 +133,30 @@ const addQuestion = (product_id, urlParams, jsonParams) => {
     }
   }
   catch(e) {
-    return  400;
+    return 400;
+  }
+}
+
+const markQuestionHelpful = (question_id) => {
+  try {
+    const hQuery = `SELECT QUESTION_HELPFULNESS FROM QUESTIONS WHERE QUESTION_ID = '5'`;
+    return db.pool.query(hQuery)
+      .then((results) => {
+        helpfulnessValue = results.rows[0].question_helpfulness + 1;
+        const updateHelpfullnessQuery = `UPDATE QUESTIONS
+        SET QUESTION_HELPFULNESS = '${helpfulnessValue}'
+        WHERE QUESTION_ID = ${question_id}`;
+        return db.pool.query(updateHelpfullnessQuery)
+          .then(() => 204)
+      })
+  }
+  catch(e) {
+    return 400;
   }
 }
 
 module.exports = {
   getProductQuestions,
   addQuestion,
+  markQuestionHelpful,
 }

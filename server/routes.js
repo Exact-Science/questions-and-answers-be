@@ -33,7 +33,8 @@ router.post('/qa/:question_id/answers', function (req, res) {
 /* ------- Put ------- */
 //Helpful Question
 router.put('/qa/question/:question_id/helpful', function (req, res) {
-  res.send(req.params.question_id);
+  qQueries.markQuestionHelpful(req.params.question_id)
+  .then((results) => res.sendStatus(results));
 })
 
 //Report Question
