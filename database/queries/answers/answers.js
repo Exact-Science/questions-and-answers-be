@@ -99,7 +99,7 @@ const addAnswer = (question_id, urlParams, jsonParams) => {
                 return await db.pool.query(pQuery)
                 .catch((error) => console.log(error))
               })
-              // Promise.all(photoPromises)
+              Promise.all(photoPromises)
               .then(() => 201);
             })
           }

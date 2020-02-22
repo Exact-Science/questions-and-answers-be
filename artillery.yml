@@ -2,7 +2,7 @@ config:
   target: 'http://localhost:3000'
   phases:
     - duration: 1
-      arrivalRate: 100
+      arrivalRate: 1000
   variables:
     photos:
       - ["https://images.unsplash.com/photo-1582194175135-726f9c51e467?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1148&q=80", "https://images.unsplash.com/photo-1582194175135-726f9c51e467?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1148&q=90"]
@@ -13,30 +13,29 @@ config:
 scenarios:
   - flow:
     - log: "New virtual user running"
-    # - get:
-    #     url: "/qa/10"
+    - get:
+        url: "/qa/10"
   # - flow:
     # - get:
     #     url: "/qa/34/answers"
   # - flow:
-    # - post:
-    #     url: "/qa/10"
-    #     qs:
-    #       name: "coffee"
-    #       body: "it is a question"
-    #       email: "abc@abc.com"
+  #   - post:
+  #       url: "/qa/10"
+  #       qs:
+  #         name: "coffee"
+  #         body: "it is a question"
+  #         email: "abc@abc.com"
   # - flow:
-    - post:
-        url: "/qa/34/answers"
-        qs:
-          name: "coffee"
-          body: "it is a question"
-          email: "abc@abc.com"
-          photos: photos
-
+  #   - post:
+  #       url: "/qa/34/answers"
+  #       qs:
+  #         name: "coffee"
+  #         body: "it is a question"
+  #         email: "abc@abc.com"
+  #         photos: photos
   # - flow:
   #   - put:
   #       url: "/qa/question/10/helpful"
   # - flow:
-    # - put:
-    #     url: "/qa/answer/34/helpful"
+  #   - put:
+  #       url: "/qa/answer/34/helpful"

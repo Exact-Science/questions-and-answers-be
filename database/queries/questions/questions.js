@@ -36,7 +36,6 @@ const getProductQuestions = (product_id, o, l) => {
 
   return db.pool.query(query)
     .then((dbResults) => {
-      console.log("pool count", db.pool.totalCount, " idleCount,", db.pool.idleCount, " waitingCount,", db.pool.waitingCount);
       // iterate over dbResults
       dbResults.rows.forEach((q) => {
 
