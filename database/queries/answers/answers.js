@@ -42,7 +42,6 @@ return db.pool.query(query)
 
         // check if the answer is not a duplicate and the answer is not null
         if (!aExists && a.answer_id) {
-          console.log(a)
           answers.results.push({
             id: a.answer_id,
             body: a.answer_body,
@@ -100,7 +99,7 @@ const addAnswer = (question_id, urlParams, jsonParams) => {
                 return await db.pool.query(pQuery)
                 .catch((error) => console.log(error))
               })
-              Promise.all(photoPromises)
+              // Promise.all(photoPromises)
               .then(() => 201);
             })
           }

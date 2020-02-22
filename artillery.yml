@@ -1,11 +1,33 @@
 config:
-  target: 'http://localhost:3000
+  target: 'http://localhost:3000'
   phases:
-    - duration: 10
-      arrivalRate: 20
-  defaults:
-    headers:
+    - duration: 1
+      arrivalRate: 100
+  http:
+    maxSockets: 300 #0
+    pool: 100 #0
+    timeout: 500 #0
 scenarios:
   - flow:
-    - get:
-        url: "/qa/10"
+    - log: "New virtual user running"
+    # - get:
+    #     url: "/qa/10"
+  # - flow:
+    # - get:
+    #     url: "/qa/34/answers"
+  # - flow:
+    # - post:
+    #     url: "/qa/10"
+  # - flow:
+    - post:
+        url: "/qa/34/answers"
+        qs:
+          name: "coffee"
+          body: "it is a question"
+          email: "abc@abc.com"
+  # - flow:
+  #   - put:
+  #       url: "/qa/question/10/helpful"
+  # - flow:
+    # - put:
+    #     url: "/qa/answer/34/helpful"

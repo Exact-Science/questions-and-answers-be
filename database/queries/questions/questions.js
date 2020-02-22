@@ -36,7 +36,7 @@ const getProductQuestions = (product_id, o, l) => {
 
   return db.pool.query(query)
     .then((dbResults) => {
-
+      console.log("pool count", db.pool.totalCount, " idleCount,", db.pool.idleCount, " waitingCount,", db.pool.waitingCount);
       // iterate over dbResults
       dbResults.rows.forEach((q) => {
 
@@ -129,7 +129,7 @@ const addQuestion = (product_id, urlParams, jsonParams) => {
           ('${product_id}', '${body}', current_timestamp, '${name}', '${email}', '0', '0')`;
 
       return db.pool.query(query)
-        .then(() => 201)
+        .then(() => 201);
     }
   }
   catch(e) {
