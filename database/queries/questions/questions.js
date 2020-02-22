@@ -24,7 +24,7 @@ const getProductQuestions = (product_id, o, l) => {
       from questions
       left join answers on questions.question_id = answers.answer_question_id
       left join photos on answers.answer_id = photos.photo_answer_id
-      where questions.product_id = '${product_id}' AND questions.question_reported < '1'
+      where questions.product_id = '${product_id}' AND questions.question_reported < '1' AND answers.answer_reported < '1'
       order by questions.question_helpfulness desc, answers.answer_helpfulness desc
       offset ${offset} limit ${limit}`;
 

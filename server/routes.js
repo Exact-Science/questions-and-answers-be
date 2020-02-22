@@ -52,7 +52,8 @@ router.put('/qa/answer/:answer_id/helpful', function (req, res) {
 //Report Answer
 router.put('/qa/answer/:answer_id/report', function (req, res) {
   aQueries.reportAnswer(req.params.answer_id)
-    .then((results) => res.sendStatus(results));
+    // .then((results) => res.sendStatus(results));
+    .then((results) => console.log(results))
 })
 
 module.exports = router;
