@@ -2,7 +2,7 @@ config:
   target: 'http://localhost:3000'
   phases:
     - duration: 1
-      arrivalRate: 1000
+      arrivalRate: 100
   variables:
     photos:
       - ["https://images.unsplash.com/photo-1582194175135-726f9c51e467?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1148&q=80", "https://images.unsplash.com/photo-1582194175135-726f9c51e467?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1148&q=90"]

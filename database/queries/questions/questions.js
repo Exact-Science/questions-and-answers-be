@@ -1,7 +1,6 @@
 const db = require('../../index.js');
 
 const getProductQuestions = (product_id, o, l) => {
-
   const offset = o || 1;
   const limit = l || 5;
   const query =
