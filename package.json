@@ -5,7 +5,8 @@
   "main": "server/",
   "scripts": {
     "build-db": "psql -U postgres -f database/schema.sql",
-    "start": "index.js"
+    "start": "index.js",
+    "stress-test": "artillery run artillery.yml",
   },
   "repository": {
     "type": "git",
