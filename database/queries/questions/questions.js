@@ -100,10 +100,7 @@ const getProductQuestions = (product_id, o, l) => {
           // iterate over output object and store photo on appropriate question
           for (let i = 0; i < questions.results.length; i++) {
             if (questions.results[i].question_id === q.question_id) {
-              questions.results[i].answers[q.answer_id].photos.push({
-                id: q.photo_id,
-                url: q.photo_url,
-              })
+              questions.results[i].answers[q.answer_id].photos.push(q.photo_url);
               break;
             }
           }
