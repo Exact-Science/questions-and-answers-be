@@ -24,9 +24,13 @@ const getProductQuestions = (product_id, o, l) => {
       from questions
       left join answers on questions.question_id = answers.answer_question_id
       left join photos on answers.answer_id = photos.photo_answer_id
-      where questions.product_id = '${product_id}' AND questions.question_reported < '1' AND answers.answer_reported < '1'
+      where questions.product_id = '${product_id}' AND questions.question_reported < '1'
       order by questions.question_helpfulness desc, answers.answer_helpfulness desc
       offset ${offset} limit ${limit}`;
+
+      // `select questions.question_id, questions.question_body, questions.question_date, questions.question_name questions.question_email, questions.question_reported, questions.question_helpfulness, answers.answer_id, answers.answer_body, answers.answer_date, answers.answer_name, answers.answer_email, answers.answer_reported, answers.answer_helpfulness, photos.photo_id, photos.photo_url from questions left join answers on questions.question_id = answers.answer_question_id left join photos on answers.answer_id = photos.photo_answer_id where questions.product_id = '$25' AND questions.question_reported < '1' AND answers.answer_reported < '1' order by questions.question_helpfulness desc, answers.answer_helpfulness desc offset 0 limit 1000;`
+
+      // `select questions.question_id, questions.question_body from questions left join answers on questions.question_id = answers.answer_question_id left join photos on answers.answer_id = photos.photo_answer_id where questions.product_id = '25' questions.question_reported < '1' order by questions.question_helpfulness desc, answers.answer_helpfulness desc offset 0 limit 1000;`
 
   let questions = {
     product_id,
@@ -78,7 +82,7 @@ const getProductQuestions = (product_id, o, l) => {
         if (!aExists && q.answer_id) {
           // iterate over output object and store answers on appropriate question
           for (let i = 0; i < questions.results.length; i++) {
-            if (questions.results[i].question_id === q.question_id) {
+            if (questions.results[i].question_id === q.question_id && q.answer_reported === 0) {
               questions.results[i].answers[q.answer_id] = {
                 id: q.answer_id,
                 body: q.answer_body,
