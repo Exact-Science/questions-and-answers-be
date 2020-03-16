@@ -23,4 +23,4 @@ $ npm start // start the expressJS server and postgreSQL database
 
 ## Authors
 Brian Bouchard
-[Github Profile](https://github.com/bee-squared)
+- [Github Profile](https://github.com/bee-squared)
