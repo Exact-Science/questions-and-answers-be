@@ -2,10 +2,10 @@
 This application extends the front end application of this retail portal - https://github.com/Exact-Science/es_apparel_fe. Specifically, it enables the user to interact with the retail portal questions and answers components.
 
 ## Getting Started
-Prerequisites:
+#### Prerequisites:
 - NodeJS
 
-
+#### Setup
 1. Navigate to the preferred local directory where your project will reside.
 2. Clone the following repository:
 ```
