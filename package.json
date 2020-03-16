@@ -2,10 +2,9 @@
   "name": "SDC",
   "version": "1.0.0",
   "description": "Questions and Answers Module Back End",
-  "main": "server/",
   "scripts": {
     "build-db": "psql -U postgres -f database/schema.sql",
-    "start": "index.js",
+    "start": "node server/index.js",
     "stress-test": "artillery run artillery.yml"
   },
   "repository": {
